@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
-import {createInteractionReply} from './createInteractionReply'
-import {onSlayerContractsCommand} from './slayerContractsCommand'
+import {createInteractionReply} from '../util/createInteractionReply'
+import {onContractsCommand} from './contracts'
 
 const Interaction = {
   SLAYER: 'slayer'
@@ -17,10 +17,12 @@ export function registerCommands (client) {
 
     switch (interaction.data.name) {
       case Interaction.SLAYER:
-        switch (command) {
+        switch (command.name) {
           case Command.CONTRACTS:
-            onSlayerContractsCommand(interaction, reply)
+            onContractsCommand(client, interaction, reply)
+            break;
         }
+        break;
     }
   })
 }

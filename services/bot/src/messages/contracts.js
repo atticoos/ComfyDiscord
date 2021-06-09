@@ -28,7 +28,7 @@ export function recordSlayerContractMessage (message) {
   })
 }
 
-export function lookupContractsByPlayer (playerId) {
+export function getContractsByPlayer (playerId) {
   return contracts[playerId]
 }
 
