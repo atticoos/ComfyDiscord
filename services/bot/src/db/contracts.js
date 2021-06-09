@@ -24,9 +24,15 @@ export function recordSlayerContractMessage (message) {
     if (!contracts[user.id]) {
       contracts[user.id] = []
     }
-    contracts[user.id].push(message.id)
+    contracts[user.id].push(getRootMessageAggregate(message))
   })
 }
+
+const getRootMessageAggregate = message => message.id
+// const getRootMessageAggregate = message => ({
+//   id: message.id,
+//   date: 1623261326778
+// })
 
 export function getContractsByPlayer (playerId) {
   return contracts[playerId]

@@ -1,5 +1,5 @@
 import Config from '../config.json'
-import {handleMessage, getContracts} from './contracts'
+import {handleMessage, getContracts} from '../db/contracts'
 
 const wait = (ttl = 5000) => new Promise(resolve => setTimeout(resolve, ttl))
 
@@ -20,7 +20,7 @@ async function fetchMessages (channel, cursor) {
   const lastMessage = messageArray[messageArray.length - 1];
 
   // 1 req/s
-  await wait(2500)
+  await wait(1200)
   return await fetchMessages(channel, lastMessage.id)
 }
 

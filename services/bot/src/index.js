@@ -2,7 +2,7 @@ import Discord from 'discord.js'
 import fetch from 'node-fetch'
 import {registerCommands} from './commands'
 import {loadSlayerContracts} from './messages/loadSlayerContracts'
-import {handleMessage} from './messages/contracts'
+import {handleMessage} from './db/contracts'
 
 const client = new Discord.Client()
 
