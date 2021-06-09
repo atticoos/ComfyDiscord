@@ -1,12 +1,12 @@
 import Discord from 'discord.js'
 import fetch from 'node-fetch'
 import {registerCommands} from './commands'
-import {onNewMessage, loadSlayerContracts} from './messages/loadSlayerContracts'
+import {loadSlayerContracts} from './messages/loadSlayerContracts'
+import {handleMessage} from './messages/contracts'
 
 const client = new Discord.Client()
 
 registerCommands(client)
-
-client.login(process.env.TOKEN)
-client.on('message', message => onNewMessage(message))
+client.on('message', handleMessage)
 client.on('ready', () => loadSlayerContracts(client))
+client.login(process.env.TOKEN)

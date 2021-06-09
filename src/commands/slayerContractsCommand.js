@@ -1,28 +1,24 @@
 import Discord from 'discord.js'
-import {lookupContractsForPlayer} from '../messages/loadSlayerContracts'
+import {lookupContractsByPlayer} from '../messages/contracts'
+
+const icon = 'https://icons.iconarchive.com/icons/chrisl21/minecraft/128/Iron-Sword-icon.png'
 
 export function onSlayerContractsCommand (client, interaction, reply) {
   console.log('interaction payload', interaction.data)
-  const [arg] = interaction.data.options
-  const playerId = arg.value
-
-  const slayerContracts = lookupContractsForPlayer(playerId)
-
-  const exampleEmbed = new Discord.MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle(`Atticoos' Slayer Contracts`)
-    .addFields(
-      {name: 'Total Contracts', value: slayerContracts.length, inline: true},
-      {name: 'This Week', value: Math.floor(slayerContracts.length / 2), inline: true}
-    )
-    // Render a list of contract messages
-    .setTimestamp()
-  reply({embeds: [exampleEmbed.toJSON()]})
+  const [{value: playerId}] = interaction.data.options
+  const user = interaction.data.resolved.users[playerId]
+  const contracts = lookupContractsByPlayer(playerId)
+  const replyMessage = createContractsMessageEmbed(user, slayerContracts)
+  return reply({embeds: [replyMessage.toJSON()]})
 }
 
-
-
-// client.api.interaction(interaction.id, interaction.token).callback.post({
-//   type: 4,
-//   data: {content: 'Hello World'}
-// })
+const createContractsMessageEmbed = (user, contracts) => new Discord.MessageEmbed()
+  .setColor('#0099ff')
+  .setTitle(`${user.username}`)
+  .setDescription('Slayer Contracts')
+  .addFields(
+    {name: 'Total Contracts', value: slayerContracts.length, inline: true},
+    {name: 'This Week', value: Math.floor(slayerContracts.length / 2), inline: true}
+  )
+  .setThumbnail()
+  .setFooter('Last contract: 3 hrs ago', icon)
