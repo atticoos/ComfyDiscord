@@ -1,5 +1,5 @@
 import Discord from 'discord.js'
-import {getContractsByPlayer} from '../messages/contracts'
+import {getContractsByPlayer} from '../db/contracts'
 
 const icon = 'https://icons.iconarchive.com/icons/chrisl21/minecraft/128/Iron-Sword-icon.png'
 
