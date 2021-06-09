@@ -1,5 +1,7 @@
 import Config from '../config.json'
 
+// TODO: Currently in-memory and has to be hydrated upon boot.
+// Move to persistent storage
 const contracts = {}
 
 export function handleMessage (message) {

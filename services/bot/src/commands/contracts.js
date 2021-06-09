@@ -5,10 +5,11 @@ const icon = 'https://icons.iconarchive.com/icons/chrisl21/minecraft/128/Iron-Sw
 
 const space = size => [...new Array(size)].map(() => '\u2800').join('')
 
-export function onContractsCommand (client, interaction, reply) {
-  console.log('interaction payload', interaction.data)
+export async function onContractsCommand (client, interaction, reply) {
+  console.log('interaction payload', interaction)
   const [{value: playerId}] = interaction.data.options
-  const user = interaction.data.resolved.users[playerId]
+  const guild = await client.guilds.fetch('172543236781506561')
+  const user = await guild.members.fetch(playerId)
   const contracts = getContractsByPlayer(playerId)
   const replyMessage = createContractsMessage(user, contracts)
   return reply({embeds: [replyMessage.toJSON()]})
@@ -16,7 +17,7 @@ export function onContractsCommand (client, interaction, reply) {
 
 const createContractsMessage = (user, contracts) => new Discord.MessageEmbed()
   .setColor('#0099ff')
-  .setAuthor('Atticoos', icon)
+  .setAuthor(user.nickname, icon)
   .setDescription(`Contracts ${space(20)}`)
   .addFields(
     {name: 'Rank', value: 'Theign', inline: true},

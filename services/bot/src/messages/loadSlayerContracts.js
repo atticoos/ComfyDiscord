@@ -19,7 +19,7 @@ async function fetchMessages (channel, cursor) {
   const messageArray = [...messages.values()]
   const lastMessage = messageArray[messageArray.length - 1];
 
-  // 1 req/s
+  // Rate limit: https://discord.com/developers/docs/topics/rate-limits
   await wait(1200)
   return await fetchMessages(channel, lastMessage.id)
 }
