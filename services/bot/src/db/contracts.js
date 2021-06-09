@@ -9,10 +9,10 @@ export function handleMessage (message) {
 }
 
 export function isSlayerContractMessage (message) {
-  // const isContractChannel = Config.contractChannelIds.indexOf(message.channel.id) > -1
+  const isContractChannel = Config.contractChannelIds.indexOf(message.channel.id) > -1
   const hasSlayerMention = message.mentions.roles.find(role => role.id === Config.slayerRoleId)
   const hasPlayerMention = message.mentions.users.size > 0
-  return hasSlayerMention && hasPlayerMention
+  return isContractChannel && hasSlayerMention && hasPlayerMention
 }
 
 export function recordSlayerContractMessage (message) {
