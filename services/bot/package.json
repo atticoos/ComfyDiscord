@@ -1,0 +1,17 @@
+{
+  "name": "comfy-discord-bot",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node ./src/index.js",
+    "dev": "nodemon --watch src --exec npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

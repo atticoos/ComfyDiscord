@@ -1,9 +1,6 @@
-const contracts = {}
+import Config from '../config.json'
 
-const slayerGroupId = '851977041922621511'
-export const contractChannelIds = [
-  '851959486189010944'
-]
+const contracts = {}
 
 export function handleMessage (message) {
   if (isSlayerContractMessage(message)) {
@@ -12,8 +9,8 @@ export function handleMessage (message) {
 }
 
 export function isSlayerContractMessage (message) {
-  // const isContractChannel = contractChannelIds.indexOf(message.channel.id) > -1
-  const hasSlayerMention = message.mentions.roles.find(role => role.id === slayerGroupId)
+  // const isContractChannel = Config.contractChannelIds.indexOf(message.channel.id) > -1
+  const hasSlayerMention = message.mentions.roles.find(role => role.id === Config.slayerRoleId)
   const hasPlayerMention = message.mentions.users.size > 0
   return hasSlayerMention && hasPlayerMention
 }
@@ -31,7 +28,7 @@ export function recordSlayerContractMessage (message) {
   })
 }
 
-export function lookupContractsByPlayer (playerId) {
+export function getContractsByPlayer (playerId) {
   return contracts[playerId]
 }
 

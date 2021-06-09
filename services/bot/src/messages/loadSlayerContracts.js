@@ -1,8 +1,5 @@
-import {
-  contractChannelIds,
-  handleMessage,
-  getContracts
-} from './contracts'
+import Config from '../config.json'
+import {handleMessage, getContracts} from './contracts'
 
 const wait = (ttl = 5000) => new Promise(resolve => setTimeout(resolve, ttl))
 
@@ -29,8 +26,8 @@ async function fetchMessages (channel, cursor) {
 
 
 export async function loadSlayerContracts (client, playerId) {
-  for (let i = 0; i < contractChannelIds.length; i++) {
-    const channelId = contractChannelIds[i]
+  for (let i = 0; i < Config.contractChannelIds.length; i++) {
+    const channelId = Config.contractChannelIds[i]
     const channel = await client.channels.fetch(channelId)
     await fetchMessages(channel)
   }
